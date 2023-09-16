@@ -1,27 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net6.0-android</TargetFramework>
-    <!-- BG8605 and BG8606 happen because there's a missing androidx.lifecycle dependency, but we don't need it here.  (The native Android Sentry SDK will use it if it exists.) -->
-    <!-- NETSDK1202 .NET 6 is out of support for "MAUI" -->
     <NoWarn>$(NoWarn);BG8605;BG8606;NETSDK1202</NoWarn>
     <SentryAndroidSdkVersion>6.29.0</SentryAndroidSdkVersion>
     <SentryAndroidSdkDirectory>$(BaseIntermediateOutputPath)\$(SentryAndroidSdkVersion)\</SentryAndroidSdkDirectory>
-    <Description>.NET Bindings for the Sentry Android SDK</Description>
   </PropertyGroup>
-
-  <!-- Use a separate readme, and don't add the changelog to the nuget. -->
-  <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)build/Sentry.Bindings.Android.targets" Pack="true" PackagePath="build/$(TargetFramework)$(TargetPlatformVersion)/Sentry.Bindings.Android.targets" />
-    <None Include="$(MSBuildThisFileDirectory)sentry-proguard.cfg" Pack="true" PackagePath="" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <InternalsVisibleTo Include="Sentry" PublicKey="$(SentryPublicKey)" />
-    <InternalsVisibleTo Include="Sentry.Testing" PublicKey="$(SentryPublicKey)" />
-    <InternalsVisibleTo Include="Sentry.Tests" PublicKey="$(SentryPublicKey)" />
-    <InternalsVisibleTo Include="Sentry.Extensions.Logging.Tests" PublicKey="$(SentryPublicKey)" />
-    <InternalsVisibleTo Include="Sentry.Maui.Tests" PublicKey="$(SentryPublicKey)" />
-  </ItemGroup>
 
   <ItemGroup>
     <AndroidLibrary Include="$(SentryAndroidSdkDirectory)sentry-$(SentryAndroidSdkVersion).jar" />
